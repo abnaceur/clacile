@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  backend_dev:
+    container_name: ${PROJET_NAME}_backend_dev
+    build: ./backend/
+    environment:
+      - VIRTUAL_HOST=si.${PROJET_NAME}.local
+    volumes : 
+      - ./backend/:/usr/src/app:rw
+    ports:
+      - "80:3000"
+    links:
+      - mongo
+  
+  mongo:
+    container_name: ${PROJET_NAME}_mongo_dev
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
