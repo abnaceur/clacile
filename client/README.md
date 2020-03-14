@@ -1,68 +1,75 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## PAGEX FRONT/CLIENT PROJECT 
 
-## Available Scripts
+## Description of the project :
 
-In the project directory, you can run:
+PageX is a solution to connect talented people in one place 
+and help them share and develop their passion.
 
-### `npm start`
+## Team 
+ - PAGEX-TEAM
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Project's Goals and objectives
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Create a web app with rich features as talented
+personal palteforme to share and exrend their connections.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies :
+ - ReactJs 
+ - Redux
+## Screenshots
 
-### `npm run build`
+## Git flow
+There are two branches:
+ - Master - origin
+ - Staging - Folow Master
+ - Develop - follow Staging
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The *Master* branch is used for production. Only the features we know are perfectly working should be merged on *Master* 
+The *Staging* branch is were the cross testing are made before merging the master branch.
+The *Develop* branch is where new features are developped.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Git Commit messages guidlines
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Commit messages should conform to the following rules:  
+	- Title in capital letters  
+	- The title is separated from the body of the message by one empty line  
+	- A line should not be longer than 80 characters  
+	- The message must focus on the WHY and WHAT, not HOW.  
+  
+This template can be used for the commit messages:  
 
-### `npm run eject`
+> COMMIT MESSAGE TITLE
+> 
+> Here, I explain WHAT I did (the improvements I made to the code, what I removed
+> from it, etc...)
+> I alos explain WHY I did it.
+  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Install the development environment
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Get the source:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+git clone https://github.com/PageExperience/FrontReact.git
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Copy the environement variables
+```
+cp .env-tempale .env
+```
 
-## Learn More
+Install dependencies
+```
+npm i
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the server
+```
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+If you want to start the server on port 5000
+```
+npm run start:port
+```
