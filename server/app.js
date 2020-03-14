@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./config/dbConnection');
 var bodyParser = require('body-parser');
-const rateLimiter = require('express-rate-limit-middleware').rateLimit
 const helmet = require('helmet');
 let mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
@@ -55,9 +54,7 @@ app.use((req, res, next) => {
 
 // Routes
 var indexRouter = require('./api/routes/index');
-var userRouter = require('./api/routes/user');
-var contentRouter = require("./api/routes/content");
-var passionRouter = require("./api/routes/passion");
+var classRouter = require('./api/routes/classroom');
 
 // Open connection to the database
 db.once('open', function() {
@@ -82,12 +79,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Call routes API
 app.use('/index', indexRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/content', contentRouter);
-app.use('/api/v1/passion', passionRouter);
+app.use('/api/v1/class', classRouter);
 
 // Generate data
-generateData.generateData();
+// generateData.generateData();
 
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //Use hamlet 
