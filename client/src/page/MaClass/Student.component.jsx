@@ -7,7 +7,7 @@ import './assets/css/main.css';
 import './assets/css/util.css';
 import './assets/css/_button.scss';
 import LaddaButton, { SLIDE_UP } from 'react-ladda';
-import axios from 'axios';
+import { toast } from 'react-toastify'
 
 class StudentForm extends React.Component {
     constructor(props) {
@@ -34,37 +34,28 @@ class StudentForm extends React.Component {
     }
 
     handlCreateClass() {
-        const { studentName, teacherCode } = this.state;
+        const { studentName, title, token } = this.state;
         this.setState({
             loading: true,
             btnText: ""
         })
 
-        if (studentName !== "" && teacherCode !== "") {
-            let data = {
+        if (studentName !== "" ) {
+           let data = {
+               data: {
+                classTitle: title,
+                classRoomToken: token,
                 studentName,
-                teacherCode
-            }
-
-            axios.post(process.env.REACT_APP_API_URL + "/api/v1/class/student", { data }, {
-                headers: {
-                    "Content-type": 'application/json'
-                },
-            })
-                .then(res => {
-                    console.log("Response :", res)
-                    this.setState({
-                        loading: false,
-                        btnText: "Confirmer",
-                    })
-                })
-                .catch(err => {
-                    console.log("Error :", err)
-                    this.setState({
-                        loading: false,
-                        btnText: "Confirmer"
-                    })
-                });
+               },
+               success: true,
+               status: "student",
+           }
+           localStorage.setItem('userInfo', JSON.stringify(data));
+           window.location.href = "/mainclass/" + data.data.classTitle + "/" + data.data.classRoomToken
+        } else {
+            toast.warning("Le nom est obligatoire !", {
+                position: toast.POSITION.TOP_RIGHT,
+            });
         }
     }
 

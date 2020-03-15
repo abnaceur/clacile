@@ -53,7 +53,7 @@ class TeacherForm extends React.Component {
                 .then(res => {
                     console.log("Response :", res)
                     if (res.data.success === true) {
-                        localStorage.setItem('userInfo', JSON.stringify(res.data.data));
+                        localStorage.setItem('userInfo', JSON.stringify(res.data));
                         // Redirect to mainClass
                         window.location.href = "/mainclass/" + res.data.data.classTitle + "/" + res.data.data.classRoomToken
                     } else {
