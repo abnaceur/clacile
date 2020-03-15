@@ -8,6 +8,7 @@ import './assets/css/util.css';
 import './assets/css/_button.scss';
 import LaddaButton, { SLIDE_UP } from 'react-ladda';
 import axios from 'axios';
+import { toast } from 'react-toastify'
 
 class TeacherForm extends React.Component {
     constructor(props) {
@@ -48,13 +49,18 @@ class TeacherForm extends React.Component {
                 classRoomToken: token,
             }
 
-            axios.post(process.env.REACT_APP_API_URL + "/api/v1/class/teacher", { data }, {
-                headers: {
-                    "Content-type": 'application/json'
-                },
-            })
+            axios.post(process.env.REACT_APP_API_URL + "/api/v1/class/teacher", { data })
                 .then(res => {
                     console.log("Response :", res)
+                    if (res.data.success === true) {
+                        localStorage.setItem('userInfo', JSON.stringify(res.data.data));
+                        // Redirect to mainClass
+                        window.location.href = "/mainclass/" + res.data.data.classTitle + "/" + res.data.data.classRoomToken
+                    } else {
+                        toast.error("Votre code d'accés est incorrect !", {
+                            position: toast.POSITION.TOP_RIGHT,
+                        }); 
+                    }
                     this.setState({
                         loading: false,
                         btnText: "Confirmer",
@@ -62,6 +68,9 @@ class TeacherForm extends React.Component {
                 })
                 .catch(err => {
                     console.log("Error :", err)
+                    toast.error("Désolé, une erreur est survenu, veuillez contactez le service client !", {
+                        position: toast.POSITION.TOP_RIGHT,
+                    }); 
                     this.setState({
                         loading: false,
                         btnText: "Confirmer"

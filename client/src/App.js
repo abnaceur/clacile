@@ -10,6 +10,7 @@ import TestRedux from './Test/Test.redux';
 import Home from './page/Home/Home.component';
 import CreateClass from './page/Classroom/CreatClass.component';
 import MaClass from './page/MaClass/MaClass.components';
+import MainClassroom from './page/MainClass/MainClass.component';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route  exact path="/" component={Home} />
           <Route  exact path="/createClass" component={CreateClass} />
           <Route  exact path="/class/:title/:token" component={MaClass} />
+          <Route  exact path="/mainclass/:title/:token" component={MainClassroom} />
         </Switch>
       </Router>
     </div>
