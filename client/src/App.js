@@ -9,6 +9,7 @@ import PrivateRoute from './middleWare/PrivateRoute';
 import TestRedux from './Test/Test.redux';
 import Home from './page/Home/Home.component';
 import CreateClass from './page/Classroom/CreatClass.component';
+import MaClass from './page/MaClass/MaClass.components';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Switch>
           <Route  exact path="/" component={Home} />
           <Route  exact path="/createClass" component={CreateClass} />
+          <Route  exact path="/class/:title/:token" component={MaClass} />
         </Switch>
       </Router>
     </div>

@@ -34,19 +34,22 @@ export default class ClassroomUrl extends React.Component {
                     </div>
                 </form>
 
-                <LaddaButton
-                    className="a-button a-button-big a-button-purple"
-                    loading={this.state.loading}
-                    onClick={this.handlCreateClass}
-                    data-color="#eee"
-                    // data-size={L}
-                    data-style={SLIDE_UP}
-                    data-spinner-size={30}
-                    data-spinner-color="#fff"
-                    data-spinner-lines={12}
-                >
-                    {btnText}
-                </LaddaButton>
+                <a href={this.props.classroomUrl}>
+
+                    <LaddaButton
+                        className="a-button a-button-big a-button-purple"
+                        loading={this.state.loading}
+                        onClick={this.handlCreateClass}
+                        data-color="#eee"
+                        // data-size={L}
+                        data-style={SLIDE_UP}
+                        data-spinner-size={30}
+                        data-spinner-color="#fff"
+                        data-spinner-lines={12}
+                    >
+                        {btnText}
+                    </LaddaButton>
+                </a>
             </div>
         );
     }
