@@ -5,6 +5,10 @@ let ClassroomSchema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
     classTitle: String,
     teacherCode: String,
+    teacherName: {
+        type: String,
+        default: "",
+    },
     classRoomToken: String,
     ClassroomDeleted: {
         type: Boolean,

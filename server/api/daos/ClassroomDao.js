@@ -18,6 +18,36 @@ async function addNewClass(data) {
     })
 }
 
+async function updateTeacherName(data) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            Classroom.find({
+                classRoomToken: data.classRoomToken,
+                classTitle: data.classTitle,
+                teacherCode: data.teacherCode,
+                ClassroomDeleted: false,
+            }).then(classroom => {
+                if (classroom.length > 0) {
+                    // Update teacher name
+                    classroom[0].teacherName = data.teacherName;
+                    Classroom.findByIdAndUpdate(classroom[0]._id,
+                        classroom[0], {
+                        new: false,
+                        useFindAndModify: false,
+                    },
+                        function (err, results) {
+                            if (err) return resolve(false);
+                            resolve(classroom[0]);
+                        })
+                } else resolve(false)
+            })
+        } catch (err) {
+            resolve(false)
+        }
+    })
+}
+
 module.exports = {
-    addNewClass
+    addNewClass,
+    updateTeacherName
 }

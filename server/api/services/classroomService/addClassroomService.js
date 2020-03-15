@@ -1,10 +1,7 @@
 const ClassroomDao = require("../../daos/ClassroomDao") 
 
-
 async function addClassroom (data, res) {
-    console.log("Data:", data);
     let url  = await ClassroomDao.addNewClass(data);
-    console.log("url ====>:", url);
     if (url) {
         let pathUrl = process.env.URL_FRONTEND + ":" + process.env.URL_FRONTEND_PORT + "/class/" 
         + url.classTitle + "/" + url.classRoomToken

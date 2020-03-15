@@ -21,7 +21,7 @@ class TeacherForm extends React.Component {
         }
 
         this.handlChange = this.handlChange.bind(this);
-        this.handlCreateClass = this.handlCreateClass.bind(this);
+        this.handlVerifyTeacher = this.handlVerifyTeacher.bind(this);
     }
 
     handlChange(e) {
@@ -33,8 +33,8 @@ class TeacherForm extends React.Component {
         });
     }
 
-    handlCreateClass() {
-        const { teacherName, teacherCode } = this.state;
+    handlVerifyTeacher() {
+        const { teacherName, token, title, teacherCode } = this.state;
         this.setState({
             loading: true,
             btnText: ""
@@ -43,7 +43,9 @@ class TeacherForm extends React.Component {
         if (teacherName !== "" && teacherCode !== "") {
             let data = {
                 teacherName,
-                teacherCode
+                teacherCode,
+                classTitle: title,
+                classRoomToken: token,
             }
 
             axios.post(process.env.REACT_APP_API_URL + "/api/v1/class/teacher", { data }, {
@@ -93,7 +95,7 @@ class TeacherForm extends React.Component {
                     <LaddaButton
                         className="a-button a-button-big a-button-purple"
                         loading={this.state.loading}
-                        onClick={this.handlCreateClass}
+                        onClick={this.handlVerifyTeacher}
                         data-color="#eee"
                         // data-size={L}
                         data-style={SLIDE_UP}
