@@ -58,7 +58,7 @@ class InputMessage extends React.Component {
 	render() {
 		/* If the chatbox state is loading, loading class for display */
 		var loadingClass = this.props.isLoading ? 'chatApp__convButton--loading' : '';
-		let sendButtonIcon = <i className={"material-icons"}></i>;
+		let sendButtonIcon = <i className={"material-icons"}>send</i>;
 		return (
 			<form onSubmit={this.handleSendMessage}>
 				<input
