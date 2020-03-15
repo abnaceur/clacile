@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-    withRouter,
+	withRouter,
 } from "react-router-dom";
 import './assets/css/mainClass.css';
+import io from 'socket.io-client';
 
 function detectURL(message) {
 	var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
-	return message.replace(urlRegex, function(urlMatch) {
+	return message.replace(urlRegex, function (urlMatch) {
 		return '<a href="' + urlMatch + '">' + urlMatch + '</a>';
 	})
 }
@@ -33,21 +34,21 @@ class InputMessage extends React.Component {
 		super(props, context);
 		this.handleSendMessage = this.handleSendMessage.bind(this);
 		this.handleTyping = this.handleTyping.bind(this);
-    }
-    
+	}
+
 	handleSendMessage(event) {
 		event.preventDefault();
 		/* Disable sendMessage if the message is empty */
-		if( this.messageInput.value.length > 0 ) {
+		if (this.messageInput.value.length > 0) {
 			this.props.sendMessageLoading(this.ownerInput.value, this.ownerAvatarInput.value, this.messageInput.value);
 			/* Reset input after send*/
 			this.messageInput.value = '';
 		}
-    }
-    
+	}
+
 	handleTyping(event) {
 		/* Tell users when another user has at least started to write */
-		if( this.messageInput.value.length > 0 ) {
+		if (this.messageInput.value.length > 0) {
 			this.props.typing(this.ownerInput.value);
 		}
 		else {
@@ -81,7 +82,7 @@ class InputMessage extends React.Component {
 					tabIndex="0"
 				/>
 				<div className={'chatApp__convButton ' + loadingClass} onClick={this.handleSendMessage}>
-				{sendButtonIcon}
+					{sendButtonIcon}
 				</div>
 			</form>
 		);
@@ -100,18 +101,18 @@ class TypingIndicator extends React.Component {
 		let typersDisplay = '';
 		let countTypers = 0;
 		/* for each user writing messages in chatroom */
-		for ( var key in this.props.isTyping ) {
+		for (var key in this.props.isTyping) {
 			/* retrieve the name if it isn't the owner of the chatbox */
-			if( key != this.props.owner && this.props.isTyping[key] ) {
+			if (key != this.props.owner && this.props.isTyping[key]) {
 				typersDisplay += ', ' + key;
 				countTypers++;
 			}
 		}
 		/* formatting text */
 		typersDisplay = typersDisplay.substr(1);
-		typersDisplay += (( countTypers > 1 ) ? ' are ' : ' is ');
+		typersDisplay += ((countTypers > 1) ? ' are ' : ' is ');
 		/* if at least one other person writes */
-		if ( countTypers > 0 ) {
+		if (countTypers > 0) {
 			return (
 				<div className={"chatApp__convTyping"}>{typersDisplay} writing
 				<span className={"chatApp__convTypingDot"}></span>
@@ -135,17 +136,17 @@ class MessageList extends React.Component {
 	render() {
 		return (
 			<div className={"chatApp__convTimeline"}>
-			{this.props.messages.slice(0).reverse().map(
-				messageItem => (
-					<MessageItem
-						key={messageItem.id}
-						owner={this.props.owner}
-						sender={messageItem.sender}
-						senderAvatar={messageItem.senderAvatar}
-						message={messageItem.message}
-					/>
-				)
-			)}
+				{this.props.messages.slice(0).reverse().map(
+					messageItem => (
+						<MessageItem
+							key={messageItem.id}
+							owner={this.props.owner}
+							sender={messageItem.sender}
+							senderAvatar={messageItem.senderAvatar}
+							message={messageItem.message}
+						/>
+					)
+				)}
 			</div>
 		);
 	}
@@ -158,11 +159,11 @@ class MessageList extends React.Component {
 class MessageItem extends React.Component {
 	render() {
 		/* message position formatting - right if I'm the author */
-		let messagePosition = (( this.props.owner == this.props.sender ) ? 'chatApp__convMessageItem--right' : 'chatApp__convMessageItem--left');
+		let messagePosition = ((this.props.owner == this.props.sender) ? 'chatApp__convMessageItem--right' : 'chatApp__convMessageItem--left');
 		return (
 			<div className={"chatApp__convMessageItem " + messagePosition + " clearfix"}>
 				<img src={this.props.senderAvatar} alt={this.props.sender} className="chatApp__convMessageAvatar" />
-				<div className="chatApp__convMessageValue" dangerouslySetInnerHTML={{__html: this.props.message}}></div>
+				<div className="chatApp__convMessageValue" dangerouslySetInnerHTML={{ __html: this.props.message }}></div>
 			</div>
 		);
 	}
@@ -193,7 +194,7 @@ class ChatBox extends React.Component {
 		return (
 			<div className={"chatApp__conv"}>
 				<Title
-					nbrStudent={23}
+					nbrStudent={this.props.countUsers}
 				/>
 				<MessageList
 					owner={this.props.owner}
@@ -226,61 +227,46 @@ class ChatBox extends React.Component {
 class ChatRoom extends React.Component {
 	constructor(props, context) {
 		super(props, context);
+		console.log("props :", this.props)
 		this.state = {
-			messages: [{
-				id: 1,
-				sender: 'Shun',
-				senderAvatar: 'https://i.pravatar.cc/150?img=32',
-				message: 'Hello 👋'
-			},
-			{
-				id: 2,
-				sender: 'Gabe',
-				senderAvatar: 'https://i.pravatar.cc/150?img=56',
-				message: 'Hey!'
-			},
-			{
-				id: 3,
-				sender: 'Gabe',
-				senderAvatar: 'https://i.pravatar.cc/150?img=56',
-				message: 'How are you?'
-			},
-			{
-				id: 4,
-				sender: 'Shun',
-				senderAvatar: 'https://i.pravatar.cc/150?img=32',
-				message: 'Great! It\'s been a while... 🙃'
-			},
-			{
-				id: 5,
-				sender: 'Gabe',
-				senderAvatar: 'https://i.pravatar.cc/150?img=56',
-				message: 'Indeed.... We\'re gonna have to fix that. 🌮🍻'
-			}
-			],
+			messages: [],
 			isTyping: [],
 		};
 		this.sendMessage = this.sendMessage.bind(this);
 		this.typing = this.typing.bind(this);
 		this.resetTyping = this.resetTyping.bind(this);
 	}
+
 	/* adds a new message to the chatroom */
 	sendMessage(sender, senderAvatar, message) {
+		const { currentUserInfo } = this.props;
+		console.log("currentUserInfo :", currentUserInfo);
+		
+		
 		setTimeout(() => {
 			let messageFormat = detectURL(message);
 			let newMessageItem = {
 				id: this.state.messages.length + 1,
-				sender: sender,
+				senderId: currentUserInfo._id,
+				sender: currentUserInfo.studentName === undefined
+					? currentUserInfo.teacherName : currentUserInfo.studentName,
 				senderAvatar: senderAvatar,
 				message: messageFormat
 			};
-			this.setState({ messages: [...this.state.messages, newMessageItem] });
+
+			this.props.socket.emit("send-msg", newMessageItem);
+
+			this.props.socket.on("broadcast-msg", (msgs) => {
+				this.setState({ messages: msgs });
+			});
+
+			// this.setState({ messages: [...this.state.messages, newMessageItem] });
 			this.resetTyping(sender);
 		}, 400);
 	}
 	/* updates the writing indicator if not already displayed */
 	typing(writer) {
-		if( !this.state.isTyping[writer] ) {
+		if (!this.state.isTyping[writer]) {
 			let stateTyping = this.state.isTyping;
 			stateTyping[writer] = true;
 			this.setState({ isTyping: stateTyping });
@@ -308,23 +294,22 @@ class ChatRoom extends React.Component {
 		users[2] = { name: 'Kate', avatar: 'https://i.pravatar.cc/150?img=47' };
 		users[3] = { name: 'Patrick', avatar: 'https://i.pravatar.cc/150?img=14' };
 		*/
-		
+
 		/* creation of a chatbox for each user present in the chatroom */
-		Object.keys(users).map(function(key) {
-			var user = users[key];
-			chatBoxes.push(
-				<ChatBox
-					key={key}
-					owner={user.name}
-					ownerAvatar={user.avatar}
-					sendMessage={sendMessage}
-					typing={typing}
-					resetTyping={resetTyping}
-					messages={messages}
-					isTyping={isTyping}
-				/>
-			);
-		});
+		var user = users[0];
+		chatBoxes.push(
+			<ChatBox
+				key={0}
+				countUsers={this.props.countUsers}
+				owner={user.name}
+				ownerAvatar={user.avatar}
+				sendMessage={sendMessage}
+				typing={typing}
+				resetTyping={resetTyping}
+				messages={messages}
+				isTyping={isTyping}
+			/>
+		);
 		return (
 			<div className={"chatApp__room"}>
 				{chatBoxes}
@@ -333,58 +318,78 @@ class ChatRoom extends React.Component {
 	}
 }
 
+
+
 class MainClassroom extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: [],
-            title: this.props.match.params.title || null,
-            token: this.props.match.params.token || null,
-            userInfo: {},
-        }
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			socket: io(process.env.REACT_APP_API_URL),
+			users: [],
+			title: this.props.match.params.title || null,
+			token: this.props.match.params.token || null,
+			userInfo: {},
+		}
+	}
 
-    componentWillMount() {
-        // @TODO Check from server
-        const { title, token } = this.state;
+	componentDidMount() {
+		const { userInfo } = this.state;
+		let data = userInfo.data;
+		this.state.socket.connect(true);
+		this.state.socket.emit('join', data);
 
-        if (title === null && token === null) {
-            window.location.href = "/"
-        } else {
-            let data = JSON.parse(localStorage.getItem('userInfo'));
-            
-            if (data.data.classRoomToken != token || data.data.classTitle != title)
-                window.location.href = "/";
-            else {
-                let users = this.state.users;
-                if (data.status === "student")
-                    users.push(data.studentName);
+		this.state.socket.emit("get-student", data);
 
-                if (data.status === "teache")
-                    users.push(data.teacherName);
-                this.setState({
-                    userInfo: data,
-                    users,
-                })
-            }
-        }
-    }
+		this.state.socket.on('student-data', (data) => {
+			let users = data;
+			this.setState({ users });
+		});
+	}
+
+	componentWillUnmount() {
+		this.state.socket.disconnect(true);
+	}
+
+	componentWillMount() {
+		// @TODO Check from server
+		const { title, token } = this.state;
+
+		if (title === null && token === null) {
+			window.location.href = "/"
+		} else {
+			let data = JSON.parse(localStorage.getItem('userInfo'));
+
+			if (data.data.classRoomToken != token || data.data.classTitle != title)
+				window.location.href = "/";
+			else {
+				this.setState({
+					userInfo: data,
+				})
+			}
+		}
+	}
 
 
-    render() {
-        const { users } = this.state;
+	render() {
+		const { users, socket, userInfo } = this.state;
 
-        return (
-            <div className="mainClass">
-                <div className="side-main">
-                    <p>Streaming</p>
-                </div>
-                <div className="chatfeed-wrapper">
-                    <ChatRoom/>
-                </div >
-            </div>
-        )
-    }
+		console.log("users :", users);
+
+		return (
+			<div className="mainClass">
+				<div className="side-main">
+					<p>Streaming</p>
+				</div>
+				<div className="chatfeed-wrapper">
+					<ChatRoom
+						socket={socket}
+						countUsers={users.length}
+						currentUserInfo={userInfo.data}
+					/>
+				</div >
+			</div>
+		)
+	}
 }
 
 

@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('backoffice:server');
 var http = require('http');
+var socket = require('socket.io');
+var connectIo = require('../api/webSocket/index');
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +30,9 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+var io = socket(server);
+connectIo.connectWebSocket(io)
 
 /**
  * Normalize a port into a number, string, or false.
