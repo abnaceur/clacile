@@ -8,6 +8,7 @@ import './assets/css/util.css';
 import './assets/css/_button.scss';
 import LaddaButton, { SLIDE_UP } from 'react-ladda';
 import { toast } from 'react-toastify'
+import axios from 'axios';
 
 class StudentForm extends React.Component {
     constructor(props) {
@@ -40,18 +41,38 @@ class StudentForm extends React.Component {
             btnText: ""
         })
 
-        if (studentName !== "" ) {
-           let data = {
-               data: {
+        if (studentName !== "") {
+            let data = {
                 classTitle: title,
                 classRoomToken: token,
-                studentName,
-               },
-               success: true,
-               status: "student",
-           }
-           localStorage.setItem('userInfo', JSON.stringify(data));
-           window.location.href = "/mainclass/" + data.data.classTitle + "/" + data.data.classRoomToken
+                studentName
+            };
+            axios.post(process.env.REACT_APP_API_URL + "/api/v1/class/student", { data })
+                .then(res => {
+                    if (res.data.success === true) {
+                        localStorage.setItem('userInfo', JSON.stringify(res.data));
+                        // Redirect to mainClass
+                        window.location.href = "/mainclass/" + res.data.data.classTitle + "/" + res.data.data.classRoomToken
+                    } else {
+                        toast.error("Votre code d'accés est incorrect !", {
+                            position: toast.POSITION.TOP_RIGHT,
+                        });
+                    }
+                    this.setState({
+                        loading: false,
+                        btnText: "Confirmer",
+                    })
+                })
+                .catch(err => {
+                    console.log("Error :", err)
+                    toast.error("Désolé, une erreur est survenu, veuillez contactez le service client !", {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                    this.setState({
+                        loading: false,
+                        btnText: "Confirmer"
+                    })
+                });
         } else {
             toast.warning("Le nom est obligatoire !", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -70,7 +91,7 @@ class StudentForm extends React.Component {
                     <form class="contact100-form validate-form">
                         <span class="contact100-form-title">
                             Joindre ta classe {title || ""}
-				</span>
+                        </span>
 
                         <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
                             <input class="input100" type="text" name="studentName" onChange={this.handlChange} placeholder="Entrez votre nom complet" required />

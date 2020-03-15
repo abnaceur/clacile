@@ -352,8 +352,7 @@ class MainClassroom extends React.Component {
             window.location.href = "/"
         } else {
             let data = JSON.parse(localStorage.getItem('userInfo'));
-            console.log("data :", data);
-
+            
             if (data.data.classRoomToken != token || data.data.classTitle != title)
                 window.location.href = "/";
             else {

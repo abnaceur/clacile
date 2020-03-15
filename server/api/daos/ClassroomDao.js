@@ -47,7 +47,27 @@ async function updateTeacherName(data) {
     })
 }
 
+async function ifExsitsclassroom(data) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            Classroom.find({
+                classRoomToken: data.classRoomToken,
+                classTitle: data.classTitle,
+                ClassroomDeleted: false,
+            }).then(classroom => {
+                if (classroom.length > 0) {
+                    // Update teacher name
+                   resolve(classroom[0]);
+                } else resolve(false)
+            })
+        } catch (err) {
+            resolve(false)
+        }
+    })
+}
+
 module.exports = {
     addNewClass,
+    ifExsitsclassroom,
     updateTeacherName
 }
