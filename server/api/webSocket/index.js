@@ -17,15 +17,16 @@ exports.connectWebSocket = (io) => {
         });
 
         socket.on('get-student', async function (data) {
+            console.log("data :", data);
+            data.socketId = socket.id;
             classroom[data._id].push(data);
-
-            console.log("classroom[data._id] :", classroom[data._id]);
-
             io.to(data._id).emit('student-data', classroom[data._id]);
         })
 
         socket.on('send-msg', async function (data) {
             messages[data.senderId].push(data);
+
+            console.log("messages[data.senderId] :", messages[data.senderId]);
             io.to(data.senderId).emit('broadcast-msg', messages[data.senderId]);
         })
 
@@ -68,9 +69,33 @@ exports.connectWebSocket = (io) => {
         //     }
         // })
 
-        socket.on('disconnect', function () {
-            socket.disconnect(true)
-            console.log("socket disconnected!")
+        socket.on('disconnect', function (data) {
+            let keyValue = "";
+
+            let i = 0;
+
+            for (let key in classroom) {
+                if (classroom[key][0] !== undefined)
+                    classroom[key].forEach(cls => {
+                        if (cls.socketId == socket.id)
+                            keyValue = key;
+
+                        if (cls.socketId.toString() !== socket.id.toString())
+                            classroom[key].splice(i - 1, 1)
+
+                        i++;
+                    })
+                
+                i = 0;
+            }
+
+            if (keyValue !== "")
+                io.to(keyValue).emit('student-data', classroom[keyValue]);
+
+            setTimeout(() => {
+                socket.disconnect(true);
+                console.log("socket disconnected!")
+            }, 300)
         });
 
     });

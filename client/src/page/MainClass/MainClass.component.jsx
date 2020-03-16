@@ -246,7 +246,7 @@ class ChatRoom extends React.Component {
 		setTimeout(() => {
 			let messageFormat = detectURL(message);
 			let newMessageItem = {
-				id: this.state.messages.length + 1,
+				id: currentUserInfo._id,
 				senderId: currentUserInfo._id,
 				sender: currentUserInfo.studentName === undefined
 					? currentUserInfo.teacherName : currentUserInfo.studentName,
@@ -257,6 +257,8 @@ class ChatRoom extends React.Component {
 			this.props.socket.emit("send-msg", newMessageItem);
 
 			this.props.socket.on("broadcast-msg", (msgs) => {
+				console.log("msgs :", msgs);
+
 				this.setState({ messages: msgs });
 			});
 
@@ -335,6 +337,9 @@ class MainClassroom extends React.Component {
 	componentDidMount() {
 		const { userInfo } = this.state;
 		let data = userInfo.data;
+
+		data.userId = Math.floor(Math.random() * 99999999);
+
 		this.state.socket.connect(true);
 		this.state.socket.emit('join', data);
 
