@@ -57,8 +57,30 @@ async function ifExsitsclassroom(data) {
             }).then(classroom => {
                 if (classroom.length > 0) {
                     // Update teacher name
-                   resolve(classroom[0]);
+                    resolve(classroom[0]);
                 } else resolve(false)
+            })
+        } catch (err) {
+            resolve(false)
+        }
+    })
+}
+
+async function getAllclassrooms() {
+    return new Promise(async (resolve, reject) => {
+        try {
+            Classroom.find({
+                ClassroomDeleted: false,
+            }).then(classroom => {
+                // Update teacher name
+                resolve(classroom.map(cls => {
+                    return ({
+                        _id: cls._id,
+                        classTitle: cls.classTitle,
+                        members: [],
+                        messages: []
+                    })
+                }));
             })
         } catch (err) {
             resolve(false)
@@ -68,6 +90,7 @@ async function ifExsitsclassroom(data) {
 
 module.exports = {
     addNewClass,
+    getAllclassrooms,
     ifExsitsclassroom,
     updateTeacherName
 }

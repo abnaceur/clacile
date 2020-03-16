@@ -346,6 +346,7 @@ class MainClassroom extends React.Component {
 		this.state.socket.emit("get-student", data);
 
 		this.state.socket.on('student-data', (data) => {
+			console.log("data hihih:", data)
 			let users = data;
 			this.setState({ users });
 		});
