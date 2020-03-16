@@ -141,7 +141,9 @@ class MessageList extends React.Component {
 						<MessageItem
 							key={messageItem.id}
 							owner={this.props.owner}
+							ownerId={this.props.ownerId}
 							sender={messageItem.sender}
+							senderId={messageItem.senderId}
 							senderAvatar={messageItem.senderAvatar}
 							message={messageItem.message}
 						/>
@@ -159,7 +161,7 @@ class MessageList extends React.Component {
 class MessageItem extends React.Component {
 	render() {
 		/* message position formatting - right if I'm the author */
-		let messagePosition = ((this.props.owner == this.props.sender) ? 'chatApp__convMessageItem--right' : 'chatApp__convMessageItem--left');
+		let messagePosition = ((this.props.owner == this.props.sender) ? 'chatApp__convMessageItem--left' : 'chatApp__convMessageItem--right');
 		return (
 			<div className={"chatApp__convMessageItem " + messagePosition + " clearfix"}>
 				<img src={this.props.senderAvatar} alt={this.props.sender} className="chatApp__convMessageAvatar" />
@@ -198,6 +200,7 @@ class ChatBox extends React.Component {
 				/>
 				<MessageList
 					owner={this.props.owner}
+					ownerId={this.props.ownerId}
 					messages={this.props.messages}
 				/>
 				<div className={"chatApp__convSendMessage clearfix"}>
@@ -227,7 +230,6 @@ class ChatBox extends React.Component {
 class ChatRoom extends React.Component {
 	constructor(props, context) {
 		super(props, context);
-		console.log("props :", this.props)
 		this.state = {
 			messages: [],
 			isTyping: [],
@@ -237,7 +239,7 @@ class ChatRoom extends React.Component {
 		this.resetTyping = this.resetTyping.bind(this);
 	}
 
-	componentWillMount(){
+	componentWillMount() {
 		this.props.socket.on("broadcast-msg", (msgs) => {
 			this.setState({ messages: msgs });
 		});
@@ -246,14 +248,12 @@ class ChatRoom extends React.Component {
 	/* adds a new message to the chatroom */
 	sendMessage(sender, senderAvatar, message) {
 		const { currentUserInfo } = this.props;
-		console.log("currentUserInfo :", currentUserInfo);
-		
-		
+
 		setTimeout(() => {
 			let messageFormat = detectURL(message);
 			let newMessageItem = {
 				id: currentUserInfo._id,
-				senderId: currentUserInfo._id,
+				senderId: currentUserInfo.userId,
 				userId: currentUserInfo.userId,
 				sender: currentUserInfo.studentName === undefined
 					? currentUserInfo.teacherName : currentUserInfo.studentName,
@@ -264,8 +264,6 @@ class ChatRoom extends React.Component {
 			this.props.socket.emit("send-msg", newMessageItem);
 
 			this.props.socket.on("broadcast-msg", (msgs) => {
-				console.log("msgs :", msgs);
-
 				this.setState({ messages: msgs });
 			});
 
@@ -295,9 +293,13 @@ class ChatRoom extends React.Component {
 		let sendMessage = this.sendMessage;
 		let typing = this.typing;
 		let resetTyping = this.resetTyping;
+		const currentUserInfo = this.props.currentUserInfo;
 
 		/* user details - can add as many users as desired */
-		users[0] = { name: 'Shun', avatar: 'https://i.pravatar.cc/150?img=32' };
+		users[0] = {
+			id: currentUserInfo.userId, name: currentUserInfo.status == "student" ?
+				currentUserInfo.studentName : currentUserInfo.teacherName, avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2016%2F08%2F08%2F09%2F17%2Favatar-1577909_960_720.png&f=1&nofb=1'
+		};
 		// users[1] = { name: 'Gabe', avatar: 'https://i.pravatar.cc/150?img=56' };
 		/* test with two other users :)
 		users[2] = { name: 'Kate', avatar: 'https://i.pravatar.cc/150?img=47' };
@@ -311,6 +313,7 @@ class ChatRoom extends React.Component {
 				key={0}
 				countUsers={this.props.countUsers}
 				owner={user.name}
+				ownerId={user.id}
 				ownerAvatar={user.avatar}
 				sendMessage={sendMessage}
 				typing={typing}
@@ -347,6 +350,7 @@ class MainClassroom extends React.Component {
 		let data = userInfo.data;
 
 		data.userId = userId;
+		data.status = userInfo.status;
 
 		this.state.socket.connect(true);
 		this.state.socket.emit('join', data);
@@ -354,7 +358,6 @@ class MainClassroom extends React.Component {
 		this.state.socket.emit("get-student", data);
 
 		this.state.socket.on('student-data', (data) => {
-			console.log("data hihih:", data)
 			let users = data;
 			this.setState({ users });
 		});
@@ -386,9 +389,6 @@ class MainClassroom extends React.Component {
 
 	render() {
 		const { users, socket, userInfo } = this.state;
-
-		console.log("users :", users);
-
 		return (
 			<div className="mainClass">
 				<div className="side-main">

@@ -16,7 +16,7 @@ async function getCheckRomms() {
 module.exports = function () {
   // mapping of all available chatrooms
   getRomms();
-  
+
   function joinChatroom(client, userData) {
     // Update chatrooms if true
     getCheckRomms();
@@ -40,25 +40,36 @@ module.exports = function () {
   }
 
 
-  function getMemberByChatroom(client, userData) {
+  function getMemberByChatroom(client) {
     let data = chatroom.getUserPosition(client);
     if (data !== undefined && chatroomTemplates[data.idx] !== undefined)
       return chatroomTemplates[data.idx].members;
     return [];
   }
 
-  function getMsgByChatroom (client) {
+  function getMsgByChatroom(client) {
     let data = chatroom.getUserPosition(client);
     if (data !== undefined && chatroomTemplates[data.idx] !== undefined)
       return chatroomTemplates[data.idx].messages;
     return [];
   }
 
+  function ifNameExist(data) {
+    let members = [];
+    chatroomTemplates.map(chat => {
+      if (data._id == chat._id) {
+        members = chat.members
+      }
+    });
+
+    return members;
+  }
 
   return {
     removeMember,
     getMsgByChatroom,
     addMsgChatroom,
+    ifNameExist,
     getMemberByChatroom,
     joinChatroom,
     getCheckRomms

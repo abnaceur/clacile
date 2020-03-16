@@ -16,6 +16,7 @@ exports.connectWebSocket = (io) => {
             handleJoin,
             handlSentMsg,
             handleDisconnect,
+            handlgetMemberByRomm,
             handlgetAllusers
           } = makeHandlers(io, client, clientManager, chatroomManager)
 
@@ -24,17 +25,11 @@ exports.connectWebSocket = (io) => {
 
         client.on('join', handleJoin);
 
-        client.on('get-student', handlgetAllusers)
+        client.on('get-student', handlgetAllusers);
 
-        client.on('send-msg', handlSentMsg)
-        // socket.on('send-msg', async function (data) {
-        //     messages[data.senderId].push(data);
+        client.on('send-msg', handlSentMsg);
 
-        //     console.log("messages[data.senderId] :", messages[data.senderId]);
-        //     io.to(data.senderId).emit('broadcast-msg', messages[data.senderId]);
-        // })
-
-     
+        client.on('get-memebers', handlgetMemberByRomm);
 
         client.on('disconnect', function () {
             console.log('client disconnect...', client.id)

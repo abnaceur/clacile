@@ -9,15 +9,21 @@ module.exports = function (io, client, clientManager, chatroomManager) {
 
     if (messages.length > 0)
       io.to(data._id).emit('broadcast-msg', messages);
-  
-    }
+  }
+
+  function handlgetMemberByRomm(data) {
+    client.join(data._id);
+    let members = chatroomManager.ifNameExist(data);
+    client.emit('memeber-exist', members);
+  }
 
   function handleDisconnect() {
     clientManager.removeClient(client);
     chatroomManager.removeMember(client);
-    let members = chatroomManager.getMemberByChatroom(client);
+    let members = [];
+    members = chatroomManager.getMemberByChatroom(client);
 
-    console.log("members updated:", members.length);
+    members = members == undefined ? [] : members;
     if (members.length > 0)
       io.to(members[0]._id).emit('student-data', members);
   }
@@ -28,7 +34,6 @@ module.exports = function (io, client, clientManager, chatroomManager) {
   }
 
   function handlSentMsg(msg) {
-    console.log("Message :", msg);
     chatroomManager.addMsgChatroom(client, msg);
     let messages = chatroomManager.getMsgByChatroom(client);
 
@@ -39,6 +44,7 @@ module.exports = function (io, client, clientManager, chatroomManager) {
     handleJoin,
     handlSentMsg,
     handlgetAllusers,
+    handlgetMemberByRomm,
     handleDisconnect,
   }
 }

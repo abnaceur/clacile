@@ -9,11 +9,14 @@ import './assets/css/_button.scss';
 import LaddaButton, { SLIDE_UP } from 'react-ladda';
 import { toast } from 'react-toastify'
 import axios from 'axios';
+import io from 'socket.io-client';
+
 
 class StudentForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            socket: io(process.env.REACT_APP_API_URL),
             title: this.props.match.params.title || null,
             token: this.props.match.params.token || null,
             btnText: "Commencez",
@@ -34,7 +37,9 @@ class StudentForm extends React.Component {
         });
     }
 
-    handlCreateClass() {
+    handlCreateClass(e) {
+        e.preventDefault();
+
         const { studentName, title, token } = this.state;
         this.setState({
             loading: true,
@@ -50,9 +55,32 @@ class StudentForm extends React.Component {
             axios.post(process.env.REACT_APP_API_URL + "/api/v1/class/student", { data })
                 .then(res => {
                     if (res.data.success === true) {
-                        localStorage.setItem('userInfo', JSON.stringify(res.data));
-                        // Redirect to mainClass
-                        window.location.href = "/mainclass/" + res.data.data.classTitle + "/" + res.data.data.classRoomToken
+                        let data = res.data.data;
+                        data.status = res.data.status;
+                        this.state.socket.emit('get-memebers', data)
+                        this.state.socket.on('memeber-exist', (members) => {
+                            if (members.length === 0) {
+                                localStorage.setItem('userInfo', JSON.stringify(res.data));
+                                // Redirect to mainClass
+                                window.location.href = "/mainclass/" + res.data.data.classTitle + "/" + res.data.data.classRoomToken
+                            } else {
+                                let names = [];
+                                if (data.status == "student") {
+                                    members.map(member => {
+                                        names.push(member.studentName);
+                                    })
+                                }
+
+                                if (!names.includes(data.studentName)) {
+                                    localStorage.setItem('userInfo', JSON.stringify(res.data));
+                                    window.location.href = "/mainclass/" + res.data.data.classTitle + "/" + res.data.data.classRoomToken
+                                } else
+                                    toast.warning("Ce nom exist !", {
+                                        position: toast.POSITION.TOP_RIGHT,
+                                    });
+                            }
+                        })
+
                     } else {
                         toast.error("Votre code d'accés est incorrect !", {
                             position: toast.POSITION.TOP_RIGHT,
