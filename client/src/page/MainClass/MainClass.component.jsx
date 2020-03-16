@@ -237,6 +237,12 @@ class ChatRoom extends React.Component {
 		this.resetTyping = this.resetTyping.bind(this);
 	}
 
+	componentWillMount(){
+		this.props.socket.on("broadcast-msg", (msgs) => {
+			this.setState({ messages: msgs });
+		});
+	}
+
 	/* adds a new message to the chatroom */
 	sendMessage(sender, senderAvatar, message) {
 		const { currentUserInfo } = this.props;
@@ -248,6 +254,7 @@ class ChatRoom extends React.Component {
 			let newMessageItem = {
 				id: currentUserInfo._id,
 				senderId: currentUserInfo._id,
+				userId: currentUserInfo.userId,
 				sender: currentUserInfo.studentName === undefined
 					? currentUserInfo.teacherName : currentUserInfo.studentName,
 				senderAvatar: senderAvatar,
@@ -327,6 +334,7 @@ class MainClassroom extends React.Component {
 		super(props);
 		this.state = {
 			socket: io(process.env.REACT_APP_API_URL),
+			userId: Math.floor(Math.random() * 99999999999999),
 			users: [],
 			title: this.props.match.params.title || null,
 			token: this.props.match.params.token || null,
@@ -335,10 +343,10 @@ class MainClassroom extends React.Component {
 	}
 
 	componentDidMount() {
-		const { userInfo } = this.state;
+		const { userInfo, userId } = this.state;
 		let data = userInfo.data;
 
-		data.userId = Math.floor(Math.random() * 99999999);
+		data.userId = userId;
 
 		this.state.socket.connect(true);
 		this.state.socket.emit('join', data);

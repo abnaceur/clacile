@@ -1,5 +1,7 @@
 module.exports = function () {
-  const members = new Map()
+  const members = new Map();
+  const messagesList = new Map();
+
   let chatHistory = []
 
   function broadcastMessage(message) {
@@ -48,7 +50,18 @@ module.exports = function () {
     }
   }
 
+  function addMessage(client, msg, chatroomTemplates) {
+    chatroomTemplates.map((chroom, idx) => {
+      if (chroom._id == msg.id) {
+        messagesList.set(client.id, { idx, msgId: chroom.messages.length })
+        chroom.messages.push(msg);
+      }
+    })
+    return chatroomTemplates;    
+  }
+
   return {
+    addMessage,
     broadcastMessage,
     getUsersByRoomId,
     addEntry,
