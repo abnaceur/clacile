@@ -164,6 +164,8 @@ class MessageItem extends React.Component {
 		let messagePosition = ((this.props.owner == this.props.sender) ? 'chatApp__convMessageItem--left' : 'chatApp__convMessageItem--right');
 		return (
 			<div className={"chatApp__convMessageItem " + messagePosition + " clearfix"}>
+				<small style={{marginLeft: '10px'}}>{this.props.sender}</small>
+				<hr style={{marginBottom: '10px'}}></hr>
 				<img src={this.props.senderAvatar} alt={this.props.sender} className="chatApp__convMessageAvatar" />
 				<div className="chatApp__convMessageValue" dangerouslySetInnerHTML={{ __html: this.props.message }}></div>
 			</div>
