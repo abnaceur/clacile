@@ -25,7 +25,8 @@ module.exports = function () {
           _id: userData._id,
           classTitle: userData.classTitle,
           studentName: userData.studentName,
-          teacherName: userData.teacherName
+          teacherName: userData.teacherName,
+          status: userData.status
         });
       }
     })

@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import './assets/css/mainClass.css';
 import io from 'socket.io-client';
+import StreamingClass from './StreamingClass.component';
 
 function detectURL(message) {
 	var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
@@ -164,8 +165,8 @@ class MessageItem extends React.Component {
 		let messagePosition = ((this.props.owner == this.props.sender) ? 'chatApp__convMessageItem--left' : 'chatApp__convMessageItem--right');
 		return (
 			<div className={"chatApp__convMessageItem " + messagePosition + " clearfix"}>
-				<small style={{marginLeft: '10px'}}>{this.props.sender}</small>
-				<hr style={{marginBottom: '10px'}}></hr>
+				<small style={{ marginLeft: '10px' }}>{this.props.sender}</small>
+				<hr style={{ marginBottom: '10px' }}></hr>
 				<img src={this.props.senderAvatar} alt={this.props.sender} className="chatApp__convMessageAvatar" />
 				<div className="chatApp__convMessageValue" dangerouslySetInnerHTML={{ __html: this.props.message }}></div>
 			</div>
@@ -338,12 +339,31 @@ class MainClassroom extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isTeacher: false,
+			teacherInfo: "",
 			socket: io(process.env.REACT_APP_API_URL),
 			userId: Math.floor(Math.random() * 99999999999999),
 			users: [],
 			title: this.props.match.params.title || null,
 			token: this.props.match.params.token || null,
 			userInfo: {},
+		}
+	}
+
+	isTeacherIn(users) {
+		let check = 0;
+		users.forEach(user => {
+			if (user.status != "student") {
+				this.setState({ teacherInfo: user.teacherName })
+				check = 1;
+			}
+
+		});
+
+		if (check === 1)
+			this.setState({ isTeacher: true });
+		else {
+			this.setState({ isTeacher: false, teacherInfo: "" });		
 		}
 	}
 
@@ -362,6 +382,12 @@ class MainClassroom extends React.Component {
 		this.state.socket.on('student-data', (data) => {
 			let users = data;
 			this.setState({ users });
+			this.isTeacherIn(users);
+		});
+
+		window.addEventListener('beforeunload', function (e) {
+			e.preventDefault();
+			e.returnValue = this.state.socket.disconnect(true);;
 		});
 	}
 
@@ -390,11 +416,32 @@ class MainClassroom extends React.Component {
 
 
 	render() {
-		const { users, socket, userInfo } = this.state;
+		const { users, socket, userInfo, title, isTeacher, teacherInfo } = this.state;
+		console.log("userInfo :", users);
+
 		return (
 			<div className="mainClass">
 				<div className="side-main">
-					<p>Streaming</p>
+					<div style={{ position: 'absolute', top: '10px' }} className={"chatApp__convTitle"}>
+						Bienvenu {userInfo.status == "student" ? userInfo.data.studentName : userInfo.data.teacherName} a votre classe de {title} </div>
+
+					{isTeacher ?
+						userInfo.status == "student" ?
+							<div class="wrap-streaming">
+								<span style={{ color: 'white' }}>Votre professeur {teacherInfo != "" ? teacherInfo : ""} est en ligne</span>
+								<div class="lds-ellipsis">
+									<div></div><div></div><div></div><div></div></div>
+							</div>
+							: <StreamingClass />
+						:
+						<div class="wrap-streaming">
+							<span style={{ color: 'white' }}>Vote prof n'est pas encore arrive
+						</span>
+							<div class="lds-ellipsis">
+
+								<div></div><div></div><div></div><div></div></div>
+
+						</div>}
 				</div>
 				<div className="chatfeed-wrapper">
 					<ChatRoom

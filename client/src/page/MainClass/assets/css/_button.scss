@@ -1,0 +1,88 @@
+
+.a-button-str {
+    display      : flex;
+    flex-direction: row;
+    width        : 100%;
+    padding      : 14px;
+    justify-content   : center;
+    border-radius: 3px; // variable
+    font-weight  : 700;
+    border: none;
+    font-family: "Quicksand";
+    transition: all .5s ease-in-out;
+    text-decoration: none;
+    &.a-button-str-darkblue {
+        background-color: #576A90;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#576A90, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-str-green {
+        background-color: #76C69F;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#76C69F, 30%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-str-gray {
+        background-color: #DDDDDD;
+        color           : white;
+        margin-right: 10px;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#DDDDDD, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-str-dark {
+        background-color: rgba(#000, 0.2);
+        color           : white;
+        text-transform  : uppercase;
+    }
+    &.a-button-str-red {
+        background-color: #F97A7A;
+        color           : white;
+        text-transform  : uppercase;
+    }
+    &.a-button-str-pink {
+        background-color: #EC6B87;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#EC6B87, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-str-blue {
+        background-color: #4A90E2;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#4A90E2, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-str-purple {
+        background-color: rgb(61, 57, 117);
+        color: #FFF;
+        text-transform: uppercase;
+        &:hover {
+            background-color: darken(#463E96, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.disable{
+        opacity: .7;
+        cursor: not-allowed;
+    }
+
+    &-big {
+        border-radius: 6px;
+        height: 60px;
+    }
+}

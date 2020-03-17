@@ -23,6 +23,7 @@ module.exports = function (io, client, clientManager, chatroomManager) {
     let members = [];
     members = chatroomManager.getMemberByChatroom(client);
 
+    console.log("Members :", members.length);
     members = members == undefined ? [] : members;
     if (members.length > 0)
       io.to(members[0]._id).emit('student-data', members);
