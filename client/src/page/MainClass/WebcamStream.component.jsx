@@ -1,17 +1,29 @@
 import React from 'react';
+import io from 'socket.io-client';
 
 class WebcamCapture extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      socket: io(process.env.REACT_APP_API_URL),
+    }
+  }
 
   async getMedia(constraints) {
+    const { currentUserInfo } = this.props;
     let stream = null;
 
     try {
       stream = await navigator.mediaDevices.getUserMedia(constraints);
       /* use the stream */
-      console.log("src :", stream);
       var video = document.querySelector('video');
       video.srcObject = stream;
-      console.log("Stream -------> ", stream);
+      console.log("currentUserInfo :", currentUserInfo);
+      let data = {
+        data: currentUserInfo,
+        stream
+      };
+      this.state.socket.emit('stream-video', data)
       video.onloadedmetadata = function (e) {
         video.play();
       }

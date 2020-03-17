@@ -5,6 +5,7 @@ import {
 import './assets/css/mainClass.css';
 import io from 'socket.io-client';
 import StreamingClass from './StreamingClass.component';
+import WebcamStreamStudent from './StudentWebcamOut.component';
 
 function detectURL(message) {
 	var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
@@ -431,8 +432,10 @@ class MainClassroom extends React.Component {
 								<span style={{ color: 'white' }}>Votre professeur {teacherInfo != "" ? teacherInfo : ""} est en ligne</span>
 								<div class="lds-ellipsis">
 									<div></div><div></div><div></div><div></div></div>
+
+									<WebcamStreamStudent stream={null} />
 							</div>
-							: <StreamingClass />
+							: <StreamingClass currentUserInfo={userInfo.data} />
 						:
 						<div class="wrap-streaming">
 							<span style={{ color: 'white' }}>Vote prof n'est pas encore arrive
@@ -442,6 +445,7 @@ class MainClassroom extends React.Component {
 								<div></div><div></div><div></div><div></div></div>
 
 						</div>}
+
 				</div>
 				<div className="chatfeed-wrapper">
 					<ChatRoom

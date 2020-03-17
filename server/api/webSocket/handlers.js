@@ -41,10 +41,16 @@ module.exports = function (io, client, clientManager, chatroomManager) {
     io.to(msg.id).emit('broadcast-msg', messages);
   }
 
+  function handlStreamVideo(data) {
+    console.log("Data ===> ", data);
+
+  }
+
   return {
     handleJoin,
     handlSentMsg,
     handlgetAllusers,
+    handlStreamVideo,
     handlgetMemberByRomm,
     handleDisconnect,
   }

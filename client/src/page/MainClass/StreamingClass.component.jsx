@@ -24,7 +24,7 @@ export default class StreamingClass extends React.Component {
 
         return (
             <div class="wrap-streaming">
-                {startStream ? <WebcamCapture /> 
+                {startStream ? <WebcamCapture currentUserInfo={this.props.currentUserInfo} /> 
                 : 
                 <LaddaButton
                     className="a-button-str a-button-str-big a-button-str-purple"
