@@ -5,7 +5,8 @@ class WebcamStreamStudent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      peer: ""
+      peer: "",
+      isStremaing: false,
     }
 
     this.connectPeer = this.connectPeer.bind(this);
@@ -14,6 +15,8 @@ class WebcamStreamStudent extends React.Component {
 
   async getMedia(stream) {
     try {
+      this.setState({isStremaing: true});
+      console.log("== isStremaing  ture ==")
       var video = document.querySelector('video');
       video.volume = 0;
       video.srcObject = stream;
@@ -88,10 +91,21 @@ class WebcamStreamStudent extends React.Component {
   }
 
   render() {
+    const { teacherInfo } = this.props;
+    const { isStremaing } = this.state;
 
     return (
       <div>
-        <video autoPlay controls="controls" />
+        {isStremaing ?
+         ""
+         : <div class="wrap-streaming">
+            <span style={{ color: 'white' }}>Votre professeur {teacherInfo != "" ? teacherInfo : ""} est en ligne</span>
+            <div class="lds-ellipsis">
+              <div></div><div></div><div></div><div></div></div>
+          </div>
+        }
+         <video autoPlay controls="controls" />
+         
       </div>
     )
 

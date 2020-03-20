@@ -60,14 +60,7 @@ module.exports = function (io, client, clientManager, chatroomManager) {
     io.to(data.student).emit("teacher-peer-response", data.data)
   }
 
-  function handlNewStudentToJoin(data) {
-    console.log("data :", data);
-    
-    // io.to(data.student).emit("teacher-peer-response", data.data)  
-  }
-
   return {
-    handlNewStudentToJoin,
     handleJoin,
     handlSendSignalTeacherRes,
     handlSendSignalToTeacher,

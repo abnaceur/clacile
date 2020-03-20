@@ -19,7 +19,6 @@ exports.connectWebSocket = (io) => {
             handlgetMemberByRomm,
             handlSendSignalToTeacher,
             handlSendSignalTeacherRes,
-            handlNewStudentToJoin,
             handlStartStream,
             handlgetAllusers
           } = makeHandlers(io, client, clientManager, chatroomManager)
@@ -40,8 +39,6 @@ exports.connectWebSocket = (io) => {
         client.on('student-start-peer', handlSendSignalToTeacher);
 
         client.on('teacher-response', handlSendSignalTeacherRes);
-
-        client.on('new-student-tojoin', handlNewStudentToJoin);
 
         client.on('disconnect', function () {
             console.log('client disconnect...', client.id)

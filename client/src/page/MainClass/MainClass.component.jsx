@@ -345,6 +345,7 @@ class MainClassroom extends React.Component {
 			socket: io(process.env.REACT_APP_API_URL),
 			userId: Math.floor(Math.random() * 99999999999999),
 			users: [],
+			isStreamOn: false,
 			title: this.props.match.params.title || null,
 			token: this.props.match.params.token || null,
 			userInfo: {},
@@ -364,7 +365,7 @@ class MainClassroom extends React.Component {
 		if (check === 1)
 			this.setState({ isTeacher: true });
 		else {
-			this.setState({ isTeacher: false, teacherInfo: "" });		
+			this.setState({ isTeacher: false, teacherInfo: "" });
 		}
 	}
 
@@ -417,8 +418,7 @@ class MainClassroom extends React.Component {
 
 
 	render() {
-		const { users, socket, userInfo, title, isTeacher, teacherInfo } = this.state;
-		console.log("userInfo :", users);
+		const { users, socket, isStreamOn, userInfo, title, isTeacher, teacherInfo } = this.state;
 
 		return (
 			<div className="mainClass">
@@ -428,13 +428,7 @@ class MainClassroom extends React.Component {
 
 					{isTeacher ?
 						userInfo.status == "student" ?
-							<div class="wrap-streaming">
-								<span style={{ color: 'white' }}>Votre professeur {teacherInfo != "" ? teacherInfo : ""} est en ligne</span>
-								<div class="lds-ellipsis">
-									<div></div><div></div><div></div><div></div></div>
-
-									<WebcamStreamStudent socket={socket} currentUserInfo={userInfo.data} />
-							</div>
+							<WebcamStreamStudent teacherInfo={teacherInfo} socket={socket} currentUserInfo={userInfo.data} />
 							: <StreamingClass socket={socket} currentUserInfo={userInfo.data} />
 						:
 						<div class="wrap-streaming">

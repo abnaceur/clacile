@@ -40,22 +40,6 @@ export default class StreamingClass extends React.Component {
                 >
                     commencez le streaming
                     </LaddaButton>}
-
-                
-                {/* <br></br> */}
-                {/* <LaddaButton
-                    className="a-button-str a-button-str-big a-button-str-purple"
-                    // loading={this.state.loading}
-                    // onClick={(e) => this.handlChangeForm(e, "teacher")}
-                    data-color="#eee"
-                    // data-size={L}
-                    data-style={SLIDE_UP}
-                    data-spinner-size={30}
-                    data-spinner-color="#fff"
-                    data-spinner-lines={12}
-                >
-                    Je suis proffesseur
-                    </LaddaButton> */}
             </div>
         )
     }
