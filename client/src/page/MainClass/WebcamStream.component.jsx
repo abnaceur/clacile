@@ -9,6 +9,26 @@ class WebcamCapture extends React.Component {
     }
   }
 
+  async playWebCam(constraints) {
+    let stream = null;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia(constraints);
+      /* use the stream */
+      var video = document.querySelector('video');
+      video.volume = 0;
+      video.srcObject = stream;
+
+      this.setState({ stream })
+      video.onloadedmetadata = function (e) {
+        video.play();
+      }
+
+    } catch (err) {
+      /* handle the error */
+      console.log("ssss :", err);
+    }
+  }
+
   componentDidMount() {
     const { currentUserInfo, socket } = this.props;
     let constraints = { audio: true, video: true };
@@ -32,21 +52,13 @@ class WebcamCapture extends React.Component {
           socket.emit('teacher-response', info);
         })
 
-        /* use the stream */
-        var video = document.querySelector('video');
-        video.volume = 0;
-        video.srcObject = stream;
-
-        this.setState({ stream })
-        video.onloadedmetadata = function (e) {
-          video.play();
-        }
-
       } catch (err) {
         /* handle the error */
         console.log("ssss :", err);
       }
     })
+
+    this.playWebCam(constraints);
   }
 
 
