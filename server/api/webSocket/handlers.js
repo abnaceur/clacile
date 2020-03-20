@@ -41,7 +41,7 @@ module.exports = function (io, client, clientManager, chatroomManager) {
     io.to(msg.id).emit('broadcast-msg', messages);
   }
 
-  function handlStreamVideo(data) {
+  function handlStartStream(data) {
     console.log("Data ===> ", data);
 
   }
@@ -50,7 +50,7 @@ module.exports = function (io, client, clientManager, chatroomManager) {
     handleJoin,
     handlSentMsg,
     handlgetAllusers,
-    handlStreamVideo,
+    handlStartStream,
     handlgetMemberByRomm,
     handleDisconnect,
   }

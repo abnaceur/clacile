@@ -37,6 +37,11 @@ class WebcamCapture extends React.Component {
     this.getMedia(constraints)
   }
 
+  componentWillReceiveProps(nextProps) {
+    let constraints = { audio: true, video: true }
+    this.getMedia(constraints)
+  }
+
   render() {
 
     return (

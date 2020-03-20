@@ -17,7 +17,7 @@ exports.connectWebSocket = (io) => {
             handlSentMsg,
             handleDisconnect,
             handlgetMemberByRomm,
-            handlStreamVideo,
+            handlStartStream,
             handlgetAllusers
           } = makeHandlers(io, client, clientManager, chatroomManager)
 
@@ -32,7 +32,8 @@ exports.connectWebSocket = (io) => {
 
         client.on('get-memebers', handlgetMemberByRomm);
 
-        client.on("stream-video", handlStreamVideo)
+        client.on('start-stream', handlStartStream);
+
         client.on('disconnect', function () {
             console.log('client disconnect...', client.id)
             handleDisconnect()
