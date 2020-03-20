@@ -18,7 +18,7 @@ class WebcamStreamStudent extends React.Component {
       this.setState({isStremaing: true});
       console.log("== isStremaing  ture ==")
       var video = document.querySelector('video');
-      video.volume = 0;
+      // video.volume = 0;
       video.srcObject = stream;
       video.onloadedmetadata = function (e) {
         video.play();
@@ -104,8 +104,7 @@ class WebcamStreamStudent extends React.Component {
               <div></div><div></div><div></div><div></div></div>
           </div>
         }
-         <video autoPlay controls="controls" />
-         
+         <video className="videoTeacher" autoPlay controls="controls" />
       </div>
     )
 

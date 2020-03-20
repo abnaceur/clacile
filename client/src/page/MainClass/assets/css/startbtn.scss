@@ -1,0 +1,95 @@
+.a-button-start {
+    display      : flex;
+    flex-direction: row;
+    width        : 100%;
+    padding      : 14px;
+    justify-content   : center;
+    border-radius: 50px; // variable
+    font-weight  : 700;
+    border: none;
+    font-family: "Quicksand";
+    transition: all .5s ease-in-out;
+    text-decoration: none;
+    &.a-button-start-darkblue {
+        background-color: #576A90;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#576A90, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-start-green {
+        background-color: #76C69F;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#76C69F, 30%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-start-gray {
+        background-color: #DDDDDD;
+        color           : white;
+        margin-right: 10px;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#DDDDDD, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-start-dark {
+        background-color: rgba(#000, 0.2);
+        color           : white;
+        text-transform  : uppercase;
+    }
+    &.a-button-start-red {
+        background-color: #F97A7A;
+        color           : white;
+        text-transform  : uppercase;
+    }
+    &.a-button-start-pink {
+        background-color: #EC6B87;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#EC6B87, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-start-blue {
+        background-color: #4A90E2;
+        color           : white;
+        text-transform  : uppercase;
+        &:hover {
+            background-color: darken(#4A90E2, 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.a-button-start-purple {
+        background-color: transparentize($color: #000000, $amount: 0);
+        color: #FFF;
+        border: 1px solid white;
+        border-radius: 50px;
+        text-transform: uppercase;
+        &:hover {
+            background-color: darken(rgb(40, 131, 108), 8%);
+            color: darken(white, 5%);
+        }
+    }
+    &.disable{
+        opacity: .7;
+        cursor: not-allowed;
+    }
+
+    &-big {
+        border-radius: 6px;
+        height: 60px;
+    }
+}
+
+.videoTeacher {
+    width: 50vw;
+    border: 10px solid white;
+    padding: 20px;
+}

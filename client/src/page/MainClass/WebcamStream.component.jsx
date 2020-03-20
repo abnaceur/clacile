@@ -15,7 +15,7 @@ class WebcamCapture extends React.Component {
       stream = await navigator.mediaDevices.getUserMedia(constraints);
       /* use the stream */
       var video = document.querySelector('video');
-      video.volume = 0;
+      // video.volume = 0;
       video.srcObject = stream;
 
       this.setState({ stream })
@@ -66,7 +66,7 @@ class WebcamCapture extends React.Component {
 
     return (
       <div>
-        <video autoPlay controls="controls" />
+        <video className="videoTeacher" autoPlay controls="controls" />
       </div>
     )
 

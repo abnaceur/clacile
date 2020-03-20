@@ -1,6 +1,6 @@
 import React from 'react';
 import './assets/css/mainClass.css';
-import './assets/css/_button.scss';
+import './assets/css/startbtn.scss';
 import LaddaButton, { SLIDE_UP } from 'react-ladda';
 import WebcamCapture from './WebcamStream.component';
 
@@ -28,7 +28,7 @@ export default class StreamingClass extends React.Component {
                 {startStream ? <WebcamCapture socket={socket} currentUserInfo={currentUserInfo} /> 
                 : 
                 <LaddaButton
-                    className="a-button-str a-button-str-big a-button-str-purple"
+                    className="a-button-start a-button-start-big a-button-start-purple"
                     // loading={this.state.loading}
                     onClick={(e) => this.handlstreaming(e)}
                     data-color="#eee"
