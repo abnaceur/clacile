@@ -30,7 +30,7 @@ module.exports = function (io, client, clientManager, chatroomManager) {
   }
 
   function handlgetAllusers(userData) {
-    let members = chatroomManager.getMemberByChatroom(client)
+    let members = chatroomManager.getMemberByChatroom(client);
     io.to(userData._id).emit('student-data', members);
   }
 
@@ -42,12 +42,28 @@ module.exports = function (io, client, clientManager, chatroomManager) {
   }
 
   function handlStartStream(data) {
-    console.log("Data ===> ", data);
+    console.log("=== handlStartStream ====")
+    io.to(data._id).emit('stream-started', data);
+  }
 
+  function handlSendSignalToTeacher (data) {
+    console.log("=== handlSendSignalToTeacher ===")
+    let members = chatroomManager.getMemberByChatroom(client);
+    let teacher = members.find(member => {return (member.status === "teacher") })
+
+    data.user.clientId = client.id;
+    io.to(teacher.clientId).emit('student-offer', data);
+  }
+
+  function handlSendSignalTeacherRes (data) {
+    console.log("=== handlSendSignalTeacherRes ===");
+    io.to(data.student).emit("teacher-peer-response", data.data)
   }
 
   return {
     handleJoin,
+    handlSendSignalTeacherRes,
+    handlSendSignalToTeacher,
     handlSentMsg,
     handlgetAllusers,
     handlStartStream,

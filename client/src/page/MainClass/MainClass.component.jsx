@@ -433,9 +433,9 @@ class MainClassroom extends React.Component {
 								<div class="lds-ellipsis">
 									<div></div><div></div><div></div><div></div></div>
 
-									<WebcamStreamStudent stream={null} />
+									<WebcamStreamStudent socket={socket} currentUserInfo={userInfo.data} />
 							</div>
-							: <StreamingClass currentUserInfo={userInfo.data} />
+							: <StreamingClass socket={socket} currentUserInfo={userInfo.data} />
 						:
 						<div class="wrap-streaming">
 							<span style={{ color: 'white' }}>Vote prof n'est pas encore arrive

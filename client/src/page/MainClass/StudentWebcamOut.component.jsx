@@ -1,16 +1,20 @@
 import React from 'react';
-import io from 'socket.io-client';
-
+let Peer = require('simple-peer');
+      
 class WebcamStreamStudent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      peer: ""
+    }
+
+    this.connectPeer = this.connectPeer.bind(this);
   }
 
-  async getMedia(constraints) {
-    let { stream } = this.props;
-
+  async getMedia(stream) {
     try {
       var video = document.querySelector('video');
+      video.volume = 0;
       video.srcObject = stream;
       video.onloadedmetadata = function (e) {
         video.play();
@@ -20,9 +24,42 @@ class WebcamStreamStudent extends React.Component {
       console.log("Error :", err);
     }
   }
-  componentDidMount() {
-    this.getMedia()
+
+  connectPeer() {
+    const { socket, currentUserInfo } = this.props;
+
+    // Connect to teacher streaming while teacher connected befor.
+    socket.on('stream-started', (dataOn) => {
+      let peer = new Peer({ initiator: true  });
+
+      peer.on('signal', data => {
+        let info = {
+          data,
+          user: currentUserInfo
+        }
+
+        socket.emit('student-start-peer', info);
+      })
+
+      socket.on('teacher-peer-response', (data) => {
+        console.log("=== Student Peer accpted teacher response ===");
+        peer.signal(data);
+      })
+    
+      peer.on('stream', stream => {
+        console.log("stream:", stream);
+        // got remote video stream, now let's show it in a video tag
+        this.getMedia(stream);
+      })
+
+    })
   }
+
+  componentDidMount() {
+    this.connectPeer();
+  }
+
+
 
   render() {
 
