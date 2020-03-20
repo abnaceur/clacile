@@ -432,7 +432,7 @@ class MainClassroom extends React.Component {
 							: <StreamingClass socket={socket} currentUserInfo={userInfo.data} />
 						:
 						<div class="wrap-streaming">
-							<span style={{ color: 'white' }}>Vote prof n'est pas encore arrive
+							<span style={{ color: 'white' }}>Veuillez patienter, votre professeur n'est pas encore arrivé
 						</span>
 							<div class="lds-ellipsis">
 

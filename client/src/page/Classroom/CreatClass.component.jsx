@@ -86,15 +86,15 @@ export default class CreateClass extends React.Component {
                     <div class="wrap-contact100">
                         <form class="contact100-form validate-form">
                             <span class="contact100-form-title">
-                                Cree une classe
+                            Créer une classe
 				</span>
 
                             <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
-                                <input class="input100" type="text" name="classTitle" onChange={this.handlChange} placeholder="Entrez le nom de la classe" required />
+                                <input class="input100" type="text" name="classTitle" onChange={this.handlChange} placeholder="Entrez le nom de votre classe" required />
                             </div>
 
                             <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                                <input class="input100" type="text" name="teacherCode" onChange={this.handlChange} placeholder="Entrez le code d'acces du proffesseur" required />
+                                <input class="input100" type="text" name="teacherCode" onChange={this.handlChange} placeholder="Entrez le code d'accès du professeur" required />
                             </div>
                         </form>
 

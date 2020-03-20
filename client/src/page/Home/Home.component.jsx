@@ -40,7 +40,7 @@ export default class Home extends React.Component {
                             data-spinner-color="#fff"
                             data-spinner-lines={12}
                         >
-                            EN classe
+                            Vas y en classe !
                             </LaddaButton>
                             </Link>
                 </div>

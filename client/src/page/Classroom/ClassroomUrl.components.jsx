@@ -13,7 +13,7 @@ export default class ClassroomUrl extends React.Component {
         super(props);
         this.state = {
             loading: false,
-            btnText: "Visiter ma class"
+            btnText: "Visiter ma classe"
         }
 
     }
@@ -25,17 +25,16 @@ export default class ClassroomUrl extends React.Component {
             <div class="wrap-contact100">
                 <form class="contact100-form validate-form">
                     <span class="contact100-form-title">
-                        Classe {this.props.classtitle} est cree
+                        Votre classe {this.props.classtitle} a bien été créé.
 				</span>
 
                     <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
-                        <label>Partagez ce lien avec vos etudiants</label>
-                        <input class="input100" type="text" name="classTitle" value={this.props.classroomUrl} required />
+                        <label style={{fontSize: '14px', fontWeight: 'bold' }} >Partagez ce lien avec vos etudiants</label>
+                        <input className="input100" type="text" name="classTitle" value={this.props.classroomUrl} required />
                     </div>
                 </form>
 
                 <a href={this.props.classroomUrl}>
-
                     <LaddaButton
                         className="a-button a-button-big a-button-purple"
                         loading={this.state.loading}

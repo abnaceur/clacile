@@ -85,7 +85,7 @@ class MaClass extends React.Component {
                             data-spinner-color="#fff"
                             data-spinner-lines={12}
                         >
-                            Je suis proffesseur
+                            Je suis professeur
                     </LaddaButton>
                     </div>}
             </div>
