@@ -76,7 +76,8 @@ export default class CreateClass extends React.Component {
         const { btnText, classTitle, classRoomData } = this.state;
 
         return (
-            <div class="container-contact100" style={{ zIndex: '111', backgroundImage: "url('https://images.pexels.com/photos/1181233/pexels-photo-1181233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')" }}>
+            // <div class="container-contact100" style={{ zIndex: '111', backgroundImage: "url('https://images.pexels.com/photos/1181233/pexels-photo-1181233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')" }}>
+            <div class="container-contact100" style={{ zIndex: '111', backgroundColor: "#007bff" }}>
                 {classRoomData !== "" ?
                     <ClassroomUrl
                         classroomUrl={classRoomData}

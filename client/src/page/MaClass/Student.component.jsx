@@ -114,7 +114,7 @@ class StudentForm extends React.Component {
         const { btnText, title } = this.state;
 
         return (
-            <div class="container-contact100" style={{ zIndex: '111', backgroundImage: "url('https://images.pexels.com/photos/1181233/pexels-photo-1181233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')" }}>
+            <div class="container-contact100" style={{ zIndex: '111', backgroundColor: "#007bff" }}>
                 <div class="wrap-contact100">
                     <form class="contact100-form validate-form">
                         <span class="contact100-form-title">

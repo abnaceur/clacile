@@ -59,7 +59,7 @@ class TeacherForm extends React.Component {
                     } else {
                         toast.error("Votre code d'accés est incorrect !", {
                             position: toast.POSITION.TOP_RIGHT,
-                        }); 
+                        });
                     }
                     this.setState({
                         loading: false,
@@ -70,7 +70,7 @@ class TeacherForm extends React.Component {
                     console.log("Error :", err)
                     toast.error("Désolé, une erreur est survenu, veuillez contactez le service client !", {
                         position: toast.POSITION.TOP_RIGHT,
-                    }); 
+                    });
                     this.setState({
                         loading: false,
                         btnText: "Confirmer"
@@ -85,12 +85,12 @@ class TeacherForm extends React.Component {
         const { btnText, teacherName, title } = this.state;
 
         return (
-            <div class="container-contact100" style={{ zIndex: '111', backgroundImage: "url('https://images.pexels.com/photos/1181233/pexels-photo-1181233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')" }}>
+            <div class="container-contact100" style={{ zIndex: '111', backgroundColor: "#007bff" }}>
                 <div class="wrap-contact100">
                     <form class="contact100-form validate-form">
                         <span class="contact100-form-title">
                             Joindre ta classe {title || ""}
-				</span>
+                        </span>
 
                         <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
                             <input class="input100" type="text" name="teacherName" onChange={this.handlChange} placeholder="Entrez votre nom complet" required />
