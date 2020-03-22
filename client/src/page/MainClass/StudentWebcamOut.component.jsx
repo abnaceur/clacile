@@ -100,8 +100,6 @@ class WebcamStreamStudent extends React.Component {
          ""
          : <div class="wrap-streaming">
             <span style={{ color: 'white' }}>Votre professeur {teacherInfo != "" ? teacherInfo : ""} est en ligne</span>
-            <div class="lds-ellipsis">
-              <div></div><div></div><div></div><div></div></div>
           </div>
         }
          <video className="videoTeacher" autoPlay controls="controls" />

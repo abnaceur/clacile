@@ -22,7 +22,8 @@ class Title extends React.Component {
 	}
 	render() {
 		return (
-			<div className={"chatApp__convTitle"}>{this.props.nbrStudent} etudiants en ligne</div>
+			<div className={"chatApp__convTitle"}>{this.props.nbrStudent === 1 ? this.props.nbrStudent + " personne en ligne" 
+			: this.props.nbrStudent + " personnes en ligne"} </div>
 		);
 	}
 }
@@ -78,7 +79,7 @@ class InputMessage extends React.Component {
 					type="text"
 					ref={message => (this.messageInput = message)}
 					className={"chatApp__convInput"}
-					placeholder="Text message"
+					placeholder="Ecrire un texte..."
 					onKeyDown={this.handleTyping}
 					onKeyUp={this.handleTyping}
 					tabIndex="0"
