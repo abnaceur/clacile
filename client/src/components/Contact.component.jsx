@@ -23,8 +23,7 @@ class Contact extends React.Component {
                                         <i class="lni lni-envelope"></i>
                                     </div>
                                     <div class="contact-info-content media-body">
-                                        <p class="text">abnaceur@student.42.fr</p>
-                                        <p class="text">contact@naceur-abdeljalil.com</p>
+                                        <p class="text">contact@clacile.com</p>
                                     </div>
                                 </div>
                             </div>

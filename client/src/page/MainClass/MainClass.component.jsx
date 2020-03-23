@@ -427,7 +427,7 @@ class MainClassroom extends React.Component {
 					<div style={{ position: 'absolute', top: '10px' }} className={"chatApp__convTitle"}>
 						Bienvenu {userInfo.status == "student" ? userInfo.data.studentName : userInfo.data.teacherName} a votre classe de {title} 
 						<p><b>Note :</b> CECI EST UN MVP, SI VOUS RENCONTREZ UN PROBLÈME, RAFRAICHISSEZ VOTRE PAGE WEB.</p>
-						<p>NOTRE EQUIPE TRAVAIL CONSTAMMENT POUR RELEASE LA PREMIERE VERSION.</p> 
+						<p>NOTRE EQUIPE TRAVAIL 24/7 POUR RELEASE LA PREMIERE VERSION.</p> 
 						</div>
 
 					{isTeacher ?
