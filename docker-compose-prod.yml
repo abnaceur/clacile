@@ -1,14 +1,14 @@
 version: '2'
 
 services:
-  backend_dev:
+  api_dev:
     container_name: ${PROJET_NAME}_backend_dev
-    build: ./backend/
+    build: ./server/
     environment:
-      - VIRTUAL_HOST=si.${PROJET_NAME}.local
+      - VIRTUAL_HOST=api.${PROJET_NAME}.local
     volumes : 
-      - ./backend/:/usr/src/app:rw
-    ports:
+      - ./server/:/usr/src/app:rw
+    restart: alwaysports:
       - "80:3000"
     links:
       - mongo
