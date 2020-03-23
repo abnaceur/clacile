@@ -1,8 +1,8 @@
 const swaggerDocument = {
     "swagger": "2.0",
     "info": {
-        "title": "MaClasse",
-        "description": "MaClasse is a solution to connect teachers with studnets in one place \
+        "title": "Clacile",
+        "description": "Clacile is a solution to connect teachers with studnets in one place \
       using P2P technology.",
         "version": "Beta"
     },
