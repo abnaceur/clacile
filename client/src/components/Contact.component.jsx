@@ -23,8 +23,8 @@ class Contact extends React.Component {
                                         <i class="lni lni-envelope"></i>
                                     </div>
                                     <div class="contact-info-content media-body">
-                                        <p class="text">hello@ayroui.com</p>
-                                        <p class="text">support@uideck.com</p>
+                                        <p class="text">abnaceur@student.42.fr</p>
+                                        <p class="text">contact@naceur-abdeljalil.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -34,8 +34,7 @@ class Contact extends React.Component {
                                         <i class="lni lni-phone"></i>
                                     </div>
                                     <div class="contact-info-content media-body">
-                                        <p class="text">+333 789-321-654</p>
-                                        <p class="text">+333 985-458-609</p>
+                                        <p class="text">+33 766 882 423</p>
                                     </div>
                                 </div>
                             </div>

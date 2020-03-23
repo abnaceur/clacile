@@ -24,7 +24,7 @@ class HomeSection extends React.Component {
                                             <h1 className="title">Education sans frontière</h1>
                                             <ul className="slider-btn rounded-buttons">
                                                 <li><a className="main-btn rounded-one page-scroll" href="#contact">CONTACT</a></li>
-                                                <li><Link to="/createClass" className="main-btn rounded-two">DEMO</Link></li>
+                                                <li><Link to="/createClass" className="main-btn rounded-two">COMMENCEZ</Link></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@ class HomeSection extends React.Component {
                                             <h1 className="title">Apprendre n'importe quand</h1>
                                             <ul className="slider-btn rounded-buttons">
                                                 <li><a className="main-btn rounded-one page-scroll" href="#contact">CONTACT</a></li>
-                                                <li><Link to="/createClass" className="main-btn rounded-two">DEMO</Link></li>
+                                                <li><Link to="/createClass" className="main-btn rounded-two">COMMENCEZ</Link></li>
                                               </ul>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@ class HomeSection extends React.Component {
                                             <h1 className="title">Apprendre n'importe où</h1>
                                             <ul className="slider-btn rounded-buttons">
                                                 <li><a className="main-btn rounded-one page-scroll" href="#contact">CONTACT</a></li>
-                                                <li><Link to="/createClass" className="main-btn rounded-two">DEMO</Link></li>
+                                                <li><Link to="/createClass" className="main-btn rounded-two">COMMENCEZ</Link></li>
                                              </ul>
                                         </div>
                                     </div>

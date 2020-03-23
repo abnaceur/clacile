@@ -20,7 +20,7 @@ export default class Home extends React.Component {
                 <Navbar />
                 <HomeSection  />
                 <Feature />
-                < Pricing />
+                {/* < Pricing /> */}
                 < Contact />
                 <Footer />
             </>

@@ -11,7 +11,7 @@ class Navbar extends React.Component {
                             <nav className="navbar navbar-expand-lg">
 
                                 <a className="navbar-brand" href="#">
-                                    <img style={{ color: 'white' }} src="assets/images/logo.svg" alt="Logo" />
+                                    <img src="assets/images/logo.svg" alt="Logo" />
 
                                 </a>
 
@@ -26,14 +26,14 @@ class Navbar extends React.Component {
                                     <ul className="navbar-nav m-auto">
                                         <li className="nav-item active"><a className="page-scroll" href="#home">Accueil</a></li>
                                         <li className="nav-item"><a className="page-scroll" href="#services">Notre vision</a></li>
-                                        <li className="nav-item"><a className="page-scroll" href="#pricing">Nos Plans</a></li>
+                                        {/* <li className="nav-item"><a className="page-scroll" href="#pricing">Nos Plans</a></li> */}
                                         <li className="nav-item"><a className="page-scroll" href="#contact">Contact</a></li>
                                     </ul>
                                 </div>
 
                                 <div className="navbar-btn d-none d-sm-inline-block">
                                     <ul>
-                                        <li><Link to="/createClass" className="solid">DEMO</Link></li>
+                                        <li><Link to="/createClass" className="solid">COMMENCEZ</Link></li>
 
                                     </ul>
                                 </div>
