@@ -34,7 +34,7 @@ export default class ClassroomUrl extends React.Component {
                     </div>
                 </form>
 
-                <a href={this.props.classroomUrl}>
+                <a style={{width: '100%'}}  href={this.props.classroomUrl}>
                     <LaddaButton
                         className="a-button a-button-big a-button-purple"
                         loading={this.state.loading}
