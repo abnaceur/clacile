@@ -8,6 +8,7 @@ import './assets/css/_button.scss';
 import LaddaButton, { SLIDE_UP } from 'react-ladda';
 import axios from 'axios';
 import ClassroomUrl from './ClassroomUrl.components';
+import { toast } from 'react-toastify'
 
 export default class CreateClass extends React.Component {
     constructor(props) {
@@ -67,6 +68,14 @@ export default class CreateClass extends React.Component {
                         btnText: "Confirmer"
                     })
                 });
+        } else {
+            toast.warning("Tout les champs doit etre rempli !", {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            this.setState({
+                loading: false,
+                btnText: "Confirmer"
+            })
         }
     }
 
