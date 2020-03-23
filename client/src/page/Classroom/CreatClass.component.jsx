@@ -96,7 +96,7 @@ export default class CreateClass extends React.Component {
                     <div class="wrap-contact100">
                         <form class="contact100-form validate-form">
                             <span class="contact100-form-title">
-                            Créer une classe
+                                Créer une classe
 				</span>
 
                             <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
@@ -123,6 +123,11 @@ export default class CreateClass extends React.Component {
                         </LaddaButton>
                     </div>
                 }
+
+                <div className="footer-info">
+                    Conformément au loi de protection des données personnelles, ce site est basé sur le peer2peer.
+    toute interaction est en temps réelle.
+                </div>
             </div>
         );
     }
