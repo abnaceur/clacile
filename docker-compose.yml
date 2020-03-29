@@ -13,6 +13,17 @@ services:
       - "3000:3000"
     links:
       - mongo
+      - kmserver
+  
+  kmserver:
+    container_name: ${PROJET_NAME}_kms_dev
+    image: kurento/kurento-media-server
+    environment:
+      - VIRTUAL_HOST=kms.${PROJET_NAME}db.local
+    volumes:
+      - ./kmserver:/etc/kurento
+    ports:
+      - "8080:8080"
   
   mongo:
     container_name: ${PROJET_NAME}_mongo_dev
