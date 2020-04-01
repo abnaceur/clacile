@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactInfo from './ContactInfo.component';
 
 class Contact extends React.Component {
 
@@ -15,7 +16,7 @@ class Contact extends React.Component {
                         </div>
                     </div>
                     <div class="contact-info pt-30">
-                        <div class="row">
+                        <div class="row justify-content-center" >
 
                             <div class="col-lg-4 col-md-6">
                                 <div class="single-contact-info contact-color-2 mt-30 d-flex ">
@@ -38,6 +39,7 @@ class Contact extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        < ContactInfo />
                     </div>
 
                 </div>

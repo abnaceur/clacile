@@ -12,15 +12,14 @@ export default class Home extends React.Component {
         super(props);
     }
 
-
     render() {
         return (
             <>
                 <Preloader />
                 <Navbar />
-                <HomeSection  />
+                <HomeSection />
                 <Feature />
-                {/* < Pricing /> */}
+                < Pricing />
                 < Contact />
                 <Footer />
             </>

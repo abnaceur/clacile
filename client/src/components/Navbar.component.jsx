@@ -26,7 +26,7 @@ class Navbar extends React.Component {
                                     <ul className="navbar-nav m-auto">
                                         <li className="nav-item active"><a className="page-scroll" href="#home">Accueil</a></li>
                                         <li className="nav-item"><a className="page-scroll" href="#services">Notre vision</a></li>
-                                        {/* <li className="nav-item"><a className="page-scroll" href="#pricing">Nos Plans</a></li> */}
+                                        <li className="nav-item"><a className="page-scroll" href="#pricing">Nos Plans</a></li>
                                         <li className="nav-item"><a className="page-scroll" href="#contact">Contact</a></li>
                                     </ul>
                                 </div>

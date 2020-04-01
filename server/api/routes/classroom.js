@@ -18,4 +18,10 @@ router.post('/teacher', classroomController.teacherClassContent)
 // @access  private
 router.post('/student', classroomController.studentClassContent)
 
+
+// @desc    Create new content
+// @route   POST /api/v1/class/new
+// @access  private
+router.post('/visitor', classroomController.addVisitor)
+
 module.exports = router;

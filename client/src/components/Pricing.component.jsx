@@ -81,7 +81,7 @@ class Pricing extends React.Component {
                                     </ul>
                                 </div>
                                 <div class="pricing-btn rounded-buttons text-center">
-                                    <a class="main-btn rounded-one" href="#">CONTACT</a>
+                                    <a class="main-btn rounded-one" href="#contact">CONTACT</a>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@ class Pricing extends React.Component {
                                     </ul>
                                 </div>
                                 <div class="pricing-btn rounded-buttons text-center">
-                                    <a class="main-btn rounded-one" href="#">CONTACT</a>
+                                    <a class="main-btn rounded-one" href="#contact">CONTACT</a>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +226,7 @@ class Pricing extends React.Component {
                                     </ul>
                                 </div>
                                 <div class="pricing-btn rounded-buttons text-center">
-                                    <a class="main-btn rounded-one" href="#">CONTACT</a>
+                                    <a class="main-btn rounded-one" href="#contact">CONTACT</a>
                                 </div>
                             </div>
                         </div>

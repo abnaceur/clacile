@@ -125,7 +125,7 @@ export default class CreateClass extends React.Component {
                 }
 
                 <div className="footer-info">
-                    Conformément au loi de protection des données personnelles, ce site est basé sur la technologie de peer2peer.
+                    <strong>[CECI EST UN MVP]</strong>  Conformément au loi de protection des données personnelles, ce site est basé sur la technologie de peer2peer.
     toute interaction est en temps réelle.
                 </div>
             </div>
