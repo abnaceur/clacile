@@ -10,7 +10,7 @@ module.exports = class AccessToken {
             bcrypt.hash(token, 10, (err, hash) => {
                 resolve(hash);
             })
-        })
+        }) 
     }
 
     getTokenByAccessToken(accesstoken) {
