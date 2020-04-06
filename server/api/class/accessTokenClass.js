@@ -11,7 +11,7 @@ module.exports = class AccessToken {
                 resolve(hash);
             })
         })    
-       }
+       }   
 
     getTokenByAccessToken(accesstoken) {
         return new Promise(async (resolve, reject) => {
