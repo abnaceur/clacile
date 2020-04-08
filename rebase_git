@@ -1,0 +1,9 @@
+
+sudo git rebase -i
+GIT_COMMITTER_DATE=1586275127 git commit --amend --no-edit --date 1586275127
+sudo git rebase --continue
+
+
+Source : 
+
+https://timestamp.online/timestamp/1515051045
