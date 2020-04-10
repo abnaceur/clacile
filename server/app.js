@@ -12,7 +12,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/openApiDocumentation/BasicInformation');
 const generateData = require('./api/generateData/index');
 
-// Main app         
+// Main app           
 var app = express();
 
 
