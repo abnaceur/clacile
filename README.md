@@ -10,17 +10,17 @@ abnaceur - ***contact@naceur-abdeljalil.com***
 
 ## Screenshots
 
-![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile1.png?raw=true)
+![](https://github.com/abnaceur/clacile/blob/master/screenshots/clacile1.png?raw=true)
 
-![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile2.png?raw=true)
+![](https://github.com/abnaceur/clacile/blob/master/screenshots/clacile2.png?raw=true)
 
-![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile3.png?raw=true)
+![](https://github.com/abnaceur/clacile/blob/master/screenshots/clacile3.png?raw=true)
 
-![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile4.png?raw=true)
+![](https://github.com/abnaceur/clacile/blob/master/screenshots/clacile4.png?raw=true)
 
-![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile5.png?raw=true)
+![](https://github.com/abnaceur/clacile/blob/master/screenshots/clacile5.png?raw=true)
 
-![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile6.png?raw=true)
+![](https://github.com/abnaceur/clacile/blob/master/screenshots/clacile6.png?raw=true)
 
 
 ## Project's Goals and objectives
@@ -73,7 +73,7 @@ This template can be used for the commit messages:
 Get the source:
 
 ```bash
-git clone https://me-me@bitbucket.org/me-me/eduin.git
+git clone https://github.com/abnaceur/clacile.git
 ```
 
 Edit your `/etc/hosts` file:
