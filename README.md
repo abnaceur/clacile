@@ -2,10 +2,26 @@ EDUIN REST API PROJECT
 =========================
 
 ## Description of the project :
-- 
+- RealTime e-Classroom
 
 ## Team 
 -
+abnaceur - ***contact@naceur-abdeljalil.com***
+
+## Screenshots
+
+![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile1.png?raw=true)
+
+![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile2.png?raw=true)
+
+![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile3.png?raw=true)
+
+![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile4.png?raw=true)
+
+![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile5.png?raw=true)
+
+![](https://github.com/abnaceur/clacile/blob/develop/screenshots/clacile6.png?raw=true)
+
 
 ## Project's Goals and objectives
 -
@@ -14,6 +30,8 @@ EDUIN REST API PROJECT
  - NodeJs/Express v8.11.4
  - MongoDb
  - Docker 17.12.1-ce
+ - simple-peer
+ - WebSocket
 
 ## Screenshots
 
